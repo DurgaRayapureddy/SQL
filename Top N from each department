@@ -1,0 +1,7 @@
+#Top N from each department
+
+select a.FirstName,a.BaseRate,a.DepartmentName from DimEmployee a left join (
+select Top 3 FirstName,BaseRate,DepartmentName  from [dbo].[DimEmployee]
+) as b
+on a.FirstName = b.FirstName
+order by a.DepartmentName,a.BaseRate
