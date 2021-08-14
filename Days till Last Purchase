@@ -1,0 +1,7 @@
+#Days till Last Purchase
+
+select *, DATEDIFF(day,LastDate,getdate()) as [Daystill lastpurchase] from (
+select a.ProductKey,CONVERT(VARCHAR, max(DueDate),103) as LastDate from [dbo].[FactResellerSales] a
+group by a.ProductKey
+) as b
+order by ProductKey
