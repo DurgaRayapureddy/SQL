@@ -1,0 +1,12 @@
+
+#SELECT Nth something from multiple tables
+
+select * from
+(
+select sum(SalesAmount) as TotalSale,OrderDate, FirstName+' ' +LastName as Name ,Title,DepartmentName,
+RANK() OVER (PARTITION BY OrderDate ORDER BY sum(SalesAmount) Asc) AS Rnk from [dbo].[FactResellerSales]
+inner join DimEmployee on FactResellerSales.EmployeeKey = DimEmployee.EmployeeKey
+group by FactResellerSales.OrderDate,FirstName,LastName,Title,DepartmentName
+)
+as A where A.Rnk=2
+order by OrderDate
