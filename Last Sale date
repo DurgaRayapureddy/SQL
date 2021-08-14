@@ -1,0 +1,6 @@
+#Last Sale date
+
+
+select a.ProductKey,CONVERT(VARCHAR, max(DueDate),103) as LastDate from [dbo].[FactResellerSales] a
+group by a.ProductKey
+order by a.ProductKey
