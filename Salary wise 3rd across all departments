@@ -1,0 +1,7 @@
+# Salary wise 3rd across all departments
+
+select FirstName, BaseRate,DepartmentName  from DimEmployee a where 3 =
+(
+select count (distinct(b.BaseRate)) from DimEmployee B
+WHERE a.BaseRate >= b.BaseRate
+)
