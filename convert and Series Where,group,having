@@ -1,0 +1,8 @@
+#convert and Series Where,group,having
+
+
+select a.ProductKey,b.EnglishProductName,count(a.ProductKey) as Total from [dbo].[FactResellerSales] a
+inner join [dbo].[DimProduct] b on a.ProductKey=b.ProductKey
+where CONVERT(VARCHAR, Duedate,103) between '10/01/2011' and '10/03/2012'
+group by a.ProductKey,b.EnglishProductName
+having count(a.ProductKey)>20 and count(a.ProductKey)<50
