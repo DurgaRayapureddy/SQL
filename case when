@@ -1,0 +1,10 @@
+#case when
+select *, (case when Total>300000 then 'Great'
+               when Total>90000 and Total<300000  then 'Better'
+			   Else 'Worst' END) as Performance
+			   FROM
+			   (
+select [dbo].[FactResellerSales].SalesTerritoryKey, sum(SalesAmount) as Total, SalesTerritoryRegion,DATEPART(year,OrderDate) as Year from [dbo].[FactResellerSales]
+inner join [dbo].[DimSalesTerritory] on [dbo].[DimSalesTerritory].SalesTerritoryKey= [dbo].[FactResellerSales].SalesTerritoryKey
+group by SalesTerritoryRegion, [dbo].[FactResellerSales].SalesTerritoryKey,DATEPART(year,OrderDate)) AS A
+order by SalesTerritoryRegion
