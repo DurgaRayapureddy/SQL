@@ -1,0 +1,7 @@
+#SELECT Nth something from single table
+
+select EmployeeKey,ParentEmployeeKey,FullName, DepartmentName,Age from
+(
+select EmployeeKey,ParentEmployeeKey,FirstName+ ' ' +LastName as FullName, DepartmentName, DATEDIFF(year,BirthDate,GETDATE())  as Age,
+RANK() OVER (PARTITION BY DepartmentName ORDER BY EmployeeKey Asc) AS Rnk from [dbo].[DimEmployee])
+AS A WHERE A.Rnk=3
