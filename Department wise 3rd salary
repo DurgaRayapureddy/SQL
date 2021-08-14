@@ -1,0 +1,8 @@
+# Department wise 3rd salary
+
+
+WITH CTE AS(
+select FirstName, BaseRate,DepartmentName, DENSE_RANK() OVER(PARTITION BY DepartmentName order by BaseRate) AS ER1 from DimEmployee
+GROUP BY FirstName, BaseRate,DepartmentName
+)
+SELECT * FROM CTE WHERE ER1=3
