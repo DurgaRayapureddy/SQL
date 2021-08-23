@@ -1,0 +1,3 @@
+select EmailAddress, REVERSE(PARSENAME(REPLACE(REVERSE(EmailAddress), '@', '.'), 1)) AS [Email1],REVERSE(PARSENAME(REPLACE(REVERSE(EmailAddress), '@', '.'), 2)) AS [Email22]
+,REVERSE(PARSENAME(REPLACE(REVERSE(EmailAddress), '@', '.'), 3)) AS [Email3]
+from DimCustomer
